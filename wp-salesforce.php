@@ -26,6 +26,7 @@ define( 'SALESFORCE__PLUGIN_NAME', 'wp-salesforce' );
 define("SALESFORCE__REDIRECT_URI", site_url('/salesforce-callback', 'https'));
 define("SALESFORCE__LOGIN_URI", "https://login.salesforce.com");
 
-require_once SALESFORCE__PLUGIN_DIR . '/includes/class.wp-salesforce.php';
+require_once SALESFORCE__PLUGIN_DIR . 'includes/class.wp-salesforce.php';
+require_once SALESFORCE__PLUGIN_DIR . 'includes/class.wp-salesforce.connection.php';
 
 WP_Salesforce::init();

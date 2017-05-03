@@ -3,8 +3,16 @@
 class WP_Salesforce_Admin_Page {
 
   public function __construct() {
-    add_action('admin_menu', array( $this, 'add_options_page' ));
-    add_action('admin_init', array( $this, 'consumer_info_settings' ));
+    add_action( 'admin_menu', array( $this, 'add_options_page' ) );
+    add_action( 'admin_init', array( $this, 'consumer_info_settings' ) );
+    add_action( 'admin_enqueue_scripts', array( $this, 'add_options_page_css' ) );
+  }
+
+  public function add_options_page_css( $hook ) {
+    if( $hook == 'settings_page_wp-salesforce' ) {
+      wp_register_style( SALESFORCE__PLUGIN_NAME, SALESFORCE__PLUGIN_URL . 'admin/css/wp-salesforce.css', false, '1.0.0' );
+      wp_enqueue_style( SALESFORCE__PLUGIN_NAME );
+    }
   }
 
   public function add_options_page() {

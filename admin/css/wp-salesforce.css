@@ -1,0 +1,8 @@
+.wrap ul {
+    margin-bottom: 30px;
+    padding-left: 30px;
+}
+
+.wrap ul li {
+    list-style-type: disc;
+}

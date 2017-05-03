@@ -51,6 +51,7 @@ if (!isset($instance_url) || $instance_url == "") {
 $_SESSION['access_token'] = $access_token;
 $_SESSION['instance_url'] = $instance_url;
 
-// TODO: Set transient
+update_option( 'salesforce_access_token', $access_token );
+update_option( 'salesforce_instance_url', $instance_url );
 
 header('Location: ' . admin_url('options-general.php?page=wp-salesforce', 'https'));
