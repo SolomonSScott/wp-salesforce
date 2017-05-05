@@ -9,7 +9,6 @@ class WP_Salesforce_Admin {
   }
 
   public function add_rewrite_rules() {
-    // TODO: Add flush_rewrite_rules() to install
     add_rewrite_tag('%salesforce-login%', '([^&]+)');
     add_rewrite_rule('salesforce-login/?$', 'index.php?salesforce-login=salesforce-login', 'top');
 
