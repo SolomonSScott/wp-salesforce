@@ -29,4 +29,7 @@ define("SALESFORCE__LOGIN_URI", "https://login.salesforce.com");
 require_once SALESFORCE__PLUGIN_DIR . 'includes/class.wp-salesforce.php';
 require_once SALESFORCE__PLUGIN_DIR . 'includes/class.wp-salesforce.connection.php';
 
+register_activation_hook( SALESFORCE__PLUGIN_FILE, array('WP_Salesforce', 'activate') );
+register_deactivation_hook( SALESFORCE__PLUGIN_FILE, array('WP_Salesforce', 'deactivate') );
+
 WP_Salesforce::init();

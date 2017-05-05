@@ -2,8 +2,8 @@
 
 class WP_Salesforce_Admin {
 
-  public function __construct() {
-    add_filter('query_vars', array( $this, 'create_query_vars' ));
+  public function init() {
+    add_filter( 'query_vars', array( $this, 'create_query_vars' ) );
     add_action( 'init', array( $this, 'add_rewrite_rules' ) );
     add_action( 'parse_request', array( $this, 'parse_login_request') );
   }
