@@ -7,7 +7,7 @@
  * Author: Solomon Scott
  * Author URI: http://solomonscott.com/
  * License: GPL2+
- * Text Domain: check-in
+ * Text Domain: wp-salesforce
 */
 
 // If this file is called directly, abort.
