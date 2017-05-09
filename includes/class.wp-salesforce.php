@@ -6,6 +6,7 @@ class WP_Salesforce {
 
   public function __construct() {
     $this->load_dependencies();
+    $this->updater();
     $this->admin_init();
   }
 
@@ -17,8 +18,14 @@ class WP_Salesforce {
   }
 
   private function load_dependencies() {
-    require_once SALESFORCE__PLUGIN_DIR. '/admin/class.wp-salesforce.admin-page.php';
-    require_once SALESFORCE__PLUGIN_DIR. '/admin/class.wp-salesforce.admin.php';
+    require_once SALESFORCE__PLUGIN_DIR . '/includes/class.wp-salesforce.updater.php';
+    require_once SALESFORCE__PLUGIN_DIR . '/admin/class.wp-salesforce.admin-page.php';
+    require_once SALESFORCE__PLUGIN_DIR . '/admin/class.wp-salesforce.admin.php';
+  }
+
+  private function updater() {
+    $updater = new WP_Salesforce_Updater();
+    $updater->init();
   }
 
   private function admin_init() {
