@@ -54,4 +54,6 @@ $_SESSION['instance_url'] = $instance_url;
 update_option( 'salesforce_access_token', $access_token );
 update_option( 'salesforce_instance_url', $instance_url );
 
+do_action( 'wp_salesforce_connection' );
+
 header('Location: ' . admin_url('options-general.php?page=wp-salesforce', 'https'));
