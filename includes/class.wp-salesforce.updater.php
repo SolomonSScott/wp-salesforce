@@ -56,7 +56,6 @@ class WP_Salesforce_Updater {
             'package' => $new_files,
             'new_version' => $this->github_response['tag_name']
           );
-          var_dump($this->basename);
           $transient->response[$this->basename] = (object) $plugin; // Return it in response
         }
       }
