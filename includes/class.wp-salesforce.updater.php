@@ -96,7 +96,7 @@ class WP_Salesforce_Updater {
 
   public function after_install( $response, $hook_extra, $result ) {
     global $wp_filesystem;
-    $install_directory = plugin_dir_path( $this->basename );
+    $install_directory = SALESFORCE__PLUGIN_DIR;
     $wp_filesystem->move( $result['destination'], $install_directory );
     $result['destination'] = $install_directory;
     if ( $this->active ) {
