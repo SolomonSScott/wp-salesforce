@@ -4,6 +4,8 @@ class WP_Salesforce_Updater {
 
   private $plugin;
 
+  private $basename;
+
   private $username = 'SolomonSScott';
 
   private $repository = 'wp-salesforce';
@@ -18,7 +20,8 @@ class WP_Salesforce_Updater {
 
   public function set_plugin_properties() {
     $this->plugin	= get_plugin_data( SALESFORCE__PLUGIN_FILE );
-    $this->active	= is_plugin_active( SALESFORCE__PLUGIN_FILE );
+    $this->basename = plugin_basename( SALESFORCE__PLUGIN_FILE );
+    $this->active	= is_plugin_active( $this->basename );
   }
 
   public function init() {
@@ -43,17 +46,18 @@ class WP_Salesforce_Updater {
     if( property_exists( $transient, 'checked') ) {
       if( $checked = $transient->checked ) {
         $this->get_repository_info();
-        $out_of_date = version_compare( $this->github_response['tag_name'], $checked[ SALESFORCE__PLUGIN_FILE ], 'gt' );
+        $out_of_date = version_compare( $this->github_response['tag_name'], $checked[ $this->basename ], 'gt' );
         if( $out_of_date ) {
           $new_files = $this->github_response['zipball_url'];
-          $slug = current( explode('/', SALESFORCE__PLUGIN_FILE ) );
+          $slug = current( explode('/', $this->basename ) );
           $plugin = array(
             'url' => $this->plugin["PluginURI"],
             'slug' => $slug,
             'package' => $new_files,
             'new_version' => $this->github_response['tag_name']
           );
-          $transient->response[SALESFORCE__PLUGIN_FILE] = (object) $plugin; // Return it in response
+          var_dump($this->basename);
+          $transient->response[$this->basename] = (object) $plugin; // Return it in response
         }
       }
     }
@@ -62,7 +66,7 @@ class WP_Salesforce_Updater {
 
   public function plugin_popup( $result, $action, $args ) {
     if( ! empty( $args->slug ) ) { // If there is a slug
-      if( $args->slug == current( explode( '/' , SALESFORCE__PLUGIN_FILE ) ) ) {
+      if( $args->slug == current( explode( '/' , $this->basename ) ) ) {
         $this->get_repository_info();
         $plugin = array(
           'name'				=> $this->plugin["Name"],
@@ -93,11 +97,11 @@ class WP_Salesforce_Updater {
 
   public function after_install( $response, $hook_extra, $result ) {
     global $wp_filesystem;
-    $install_directory = plugin_dir_path( SALESFORCE__PLUGIN_FILE );
+    $install_directory = plugin_dir_path( $this->basename );
     $wp_filesystem->move( $result['destination'], $install_directory );
     $result['destination'] = $install_directory;
     if ( $this->active ) {
-      activate_plugin( SALESFORCE__PLUGIN_FILE );
+      activate_plugin( $this->basename );
     }
     return $result;
   }

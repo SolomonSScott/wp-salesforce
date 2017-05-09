@@ -1,9 +1,9 @@
 <?php
 /*
  * Plugin Name: WP Salesforce
- * Plugin URI:
+ * Plugin URI: https://github.com/SolomonSScott/wp-salesforce/
  * Description: Pull information from Salesforce
- * Version: 1.0.0
+ * Version: 0.9.0
  * Author: Solomon Scott
  * Author URI: http://solomonscott.com/
  * License: GPL2+
@@ -15,7 +15,7 @@ if ( ! defined( 'WPINC' ) ) {
   die;
 }
 
-define( 'SALESFORCE__VERSION', '1.0.0' );
+define( 'SALESFORCE__VERSION', '0.9.0' );
 define( 'SALESFORCE__PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SALESFORCE__PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'SALESFORCE__PLUGIN_BASE', plugin_basename( __FILE__ ) );
