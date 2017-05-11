@@ -8,6 +8,10 @@ class WP_Salesforce_Admin_Page {
     add_action( 'admin_enqueue_scripts', array( $this, 'add_options_page_css' ) );
   }
 
+  /**
+   * Add CSS to plugin admin page
+   * @param $hook
+   */
   public function add_options_page_css( $hook ) {
     if( $hook == 'settings_page_wp-salesforce' ) {
       wp_register_style( SALESFORCE__PLUGIN_NAME, SALESFORCE__PLUGIN_URL . 'admin/css/wp-salesforce.css', false, '1.0.0' );
@@ -15,6 +19,9 @@ class WP_Salesforce_Admin_Page {
     }
   }
 
+  /**
+   * Add options to dashboard menu
+   */
   public function add_options_page() {
     add_submenu_page( 'options-general.php', 'WP Salesforce', 'WP Salesforce', 'manage_options', 'wp-salesforce', array(
       $this,
@@ -22,6 +29,9 @@ class WP_Salesforce_Admin_Page {
     ));
   }
 
+  /**
+   * Output html needed for options page
+   */
   public function options_page_output() {
 
     if( !current_user_can( 'manage_options' ) ) {
@@ -31,6 +41,9 @@ class WP_Salesforce_Admin_Page {
     include SALESFORCE__PLUGIN_DIR . '/admin/templates/wp-salesforce-form.php';
   }
 
+  /**
+   * Register and add consumer key and secret settings
+   */
   public function consumer_info_settings() {
     register_setting( 'wp_salesforce_keys', 'salesforce_consumer_key' );
     register_setting( 'wp_salesforce_keys', 'salesforce_consumer_secret' );
@@ -41,10 +54,14 @@ class WP_Salesforce_Admin_Page {
     add_settings_field( 'salesforce_consumer_secret', 'Consumer Secret', array($this, 'consumer_secret_field'), 'wp-salesforce', 'wp_salesforce_keys' );
   }
 
-  public function consumer_info_section() {
+  /**
+   * Needed just for section callback
+   */
+  public function consumer_info_section() {}
 
-  }
-
+  /**
+   * Output consumer key field
+   */
   public function consumer_key_field() {
     $consumer_key = ( get_option('salesforce_consumer_key') ) ? get_option('salesforce_consumer_key') : '';
     $html = '<input type="text" name="salesforce_consumer_key" id="salesforce_consumer_key" value="' . $consumer_key . '" class="large-text">';
@@ -52,6 +69,9 @@ class WP_Salesforce_Admin_Page {
     echo $html;
   }
 
+  /**
+   * Output consumer secret field
+   */
   public function consumer_secret_field() {
     $consumer_secret = ( get_option('salesforce_consumer_secret') ) ? get_option('salesforce_consumer_secret') : '';
     $html = '<input type="text" name="salesforce_consumer_secret" id="salesforce_consumer_secret" value="' . $consumer_secret . '"class="regular-text">';

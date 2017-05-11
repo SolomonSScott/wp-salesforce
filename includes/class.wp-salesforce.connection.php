@@ -2,8 +2,14 @@
 
 class WP_Salesforce_Connection {
 
+  /**
+   * @var mixed|void
+   */
   private $access_token;
 
+  /**
+   * @var mixed|void
+   */
   private $instance_url;
 
   public function __construct() {
@@ -11,6 +17,11 @@ class WP_Salesforce_Connection {
     $this->instance_url = get_option('salesforce_instance_url');
   }
 
+  /**
+   * Build and fetch data based on query
+   * @param $query
+   * @return array|mixed|object|string
+   */
   public function query( $query ) {
 
     if( empty($this->access_token) || empty($this->instance_url) ) {

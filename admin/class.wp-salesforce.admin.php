@@ -8,6 +8,10 @@ class WP_Salesforce_Admin {
     add_action( 'parse_request', array( $this, 'parse_login_request') );
   }
 
+  /**
+   * Add salesforce login and salesforce callback
+   * as virtual pages to WordPress
+   */
   public function add_rewrite_rules() {
     add_rewrite_tag('%salesforce-login%', '([^&]+)');
     add_rewrite_rule('salesforce-login/?$', 'index.php?salesforce-login=salesforce-login', 'top');
@@ -16,12 +20,22 @@ class WP_Salesforce_Admin {
     add_rewrite_rule('salesforce-callback/?$', 'index.php?salesforce-callback=salesforce-callback', 'top');
   }
 
+  /**
+   * Set query to create virtual pages
+   * @param $vars
+   * @return array
+   */
   public function create_query_vars( $vars ) {
     $vars[] = 'salesforce-login';
     $vars[] = 'salesforce-callback';
     return $vars;
   }
 
+  /**
+   * Add custom templates for salesforce
+   * login and callback urls
+   * @param $wp
+   */
   public function parse_login_request( &$wp ) {
     if ( array_key_exists( 'salesforce-login', $wp->query_vars ) ) {
       include(SALESFORCE__PLUGIN_DIR . 'admin/salesforce-login.php');
