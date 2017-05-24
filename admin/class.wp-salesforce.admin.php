@@ -34,14 +34,14 @@ class WP_Salesforce_Admin {
   /**
    * Add custom templates for salesforce
    * login and callback urls
-   * @param $wp
+   * *@param $wordpress
    */
-  public function parse_login_request( &$wp ) {
-    if ( array_key_exists( 'salesforce-login', $wp->query_vars ) ) {
+  public function parse_login_request( &$wordpress ) {
+    if ( array_key_exists( 'salesforce-login', $wordpress->query_vars ) ) {
       include(SALESFORCE__PLUGIN_DIR . 'admin/salesforce-login.php');
       exit();
     }
-    if ( array_key_exists( 'salesforce-callback', $wp->query_vars ) ) {
+    if ( array_key_exists( 'salesforce-callback', $wordpress->query_vars ) ) {
       include(SALESFORCE__PLUGIN_DIR . 'admin/salesforce-callback.php');
       exit();
     }
