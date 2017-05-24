@@ -2,7 +2,7 @@
 
 class WP_Salesforce_Admin_Page {
 
-  public function __construct() {
+  public function init() {
     add_action( 'admin_menu', array( $this, 'add_options_page' ) );
     add_action( 'admin_init', array( $this, 'consumer_info_settings' ) );
     add_action( 'admin_enqueue_scripts', array( $this, 'add_options_page_css' ) );
