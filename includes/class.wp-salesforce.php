@@ -41,7 +41,7 @@ class WP_Salesforce {
   private function admin_init() {
     $admin_page = new WP_Salesforce_Admin_Page();
     $admin_page->init();
-    
+
     $admin_urls = new WP_Salesforce_Admin();
     $admin_urls->init();
   }
